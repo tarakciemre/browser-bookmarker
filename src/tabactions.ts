@@ -1,7 +1,9 @@
+// import { AppManager } from "./tab_manager/app_manager";
 class TabManager {
   private tabsContainer: HTMLElement;
   private addTabButton: HTMLElement;
-  private tabCloseButton: HTMLElement;
+  // private appManager: AppManager;
+  private currentTab = 4;
 
   constructor() {
     this.tabsContainer = document.querySelector('.tab-bar')!;
@@ -10,11 +12,14 @@ class TabManager {
     this.tabsContainer.querySelectorAll('.tab button').forEach((closeButton) => {
       closeButton.addEventListener('click', () => this.closeTab(closeButton.parentElement!));
     });
+    // this.appManager = new AppManager();
+    // this.appManager.addTab();
+    //this.appManager.addTab(this.currentTab);
   }  
   private addNewTab() {
     const tab = document.createElement('div');
     tab.className = 'tab';
-
+    tab.id = "" + this.currentTab;
     const title = document.createElement('h4');
     title.textContent = 'Title';
 
@@ -25,6 +30,9 @@ class TabManager {
     tab.appendChild(title);
     tab.appendChild(closeButton);
     this.tabsContainer.insertBefore(tab, this.addTabButton);
+
+    // this.appManager.addTab(this.currentTab);
+    this.currentTab++;
   }
 
   private closeTab(tab: HTMLElement) {
