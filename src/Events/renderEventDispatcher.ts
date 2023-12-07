@@ -1,6 +1,6 @@
 import { EventDispatcher, renderListener } from "./eventInterfaces";
 
-class RenderDispatcher implements EventDispatcher{
+export class RenderDispatcher implements EventDispatcher{
     observers: renderListener[]
     private tabsContainer: HTMLElement;
     private static instance: RenderDispatcher | null = null;
@@ -37,7 +37,11 @@ class RenderDispatcher implements EventDispatcher{
       })
     }
 
-    private activateTab(tab: Element) {
+    addTabEvent(tab:Element) {
+      tab.addEventListener('click', () => this.activateTab(tab));
+    }
+
+    private activateTab(tab:Element) {
       this.notifyRender(tab.getAttribute("id"))
     }
 }
