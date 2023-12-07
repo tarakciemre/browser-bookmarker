@@ -1,7 +1,7 @@
 
-class History {
+export class SearchHistory {
 
-    defaultPage: string = "https://www.google.com";
+    defaultPage: "https://www.google.com";
     historyArray: Array<string>;
     index: number;
 
