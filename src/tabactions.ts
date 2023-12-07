@@ -19,6 +19,7 @@ class TabManager {
   private addNewTab() {
     const tab = document.createElement('div');
     tab.className = 'tab fade-in';
+    tab.id = `tab-${this.currentTab}`;
 
     const title = document.createElement('h4');
     title.textContent = 'Title';
