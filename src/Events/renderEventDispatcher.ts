@@ -22,8 +22,10 @@ class RenderDispatcher implements EventDispatcher{
         this.observers.splice(indexToRemove, 1);
       }
     }
-    notifyRender(url: String): void {
-      throw new Error("Method not implemented.");
+    notifyRender(id: String): void {
+      this.observers.map(o=> {
+        o.onRender(id)
+      })
     }
 
     private activateTab(tab: Element) {
