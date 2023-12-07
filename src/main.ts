@@ -7,6 +7,7 @@ function createWindow() {
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+      webviewTag: true
     },
     width: 800,
   });
@@ -38,6 +39,10 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
+});
+
+app.on('browser-window-created',function(e,window) {
+  window.setMenu(null);
 });
 
 // In this file you can include the rest of your app"s specific main process

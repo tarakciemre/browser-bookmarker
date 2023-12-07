@@ -2,8 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <title>EYOB</title>
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
@@ -12,14 +11,50 @@
       http-equiv="X-Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
     />
+    <link rel="stylesheet" href="src/main.css">
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>, Chromium
-    <span id="chrome-version"></span>, and Electron
-    <span id="electron-version"></span>.
-
-    <!-- You can also require other files to run in this process -->
-    <script src="./dist/renderer.js"></script>
+    <div class="top-section">
+      <nav class="tab-bar">
+        <div class="tab tab-active">
+          <h4>Title</h4>
+          <button>x</button>
+        </div>
+        <div class="tab">
+          <h4>Title</h4>
+          <button>x</button>
+        </div>
+        <div class="tab">
+          <h4>Title</h4>
+          <button>x</button>
+        </div>
+        <button class="add-tab-button">
+          <img width="25px" src="assets/icons/plus.svg" alt="Search Icon">
+        </button>
+      </nav>
+      <div class="main-bar">
+        <div class="nav-search">
+          <div class="nav-buttons">
+            <button class="nav-button">
+              <img width="25px" src="assets/icons/left.svg" alt="Search Icon">
+            </button>
+            <button class="nav-button">
+              <img width="25px" src="assets/icons/right.svg" alt="Search Icon">
+            </button>
+            <button class="nav-button">
+              <img width="25px" src="assets/icons/reload.svg" alt="Search Icon">
+            </button>
+          </div>
+        </div>
+        <div class="search-container">
+          <input type="text" id="search-bar" placeholder="Search...">
+          <button type="button" id="search-button">Search</button>
+        </div>
+      </div>
+      <div class="bookmark-bar">
+        <div class="bookmark"></div>
+      </div>
+    </div>
   </body>
+  <script src="node_modules/electron-tabs/dist/electron-tabs.js"></script>
 </html>
