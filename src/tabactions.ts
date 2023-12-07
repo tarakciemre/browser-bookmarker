@@ -19,6 +19,7 @@ class TabManager {
     title.textContent = 'Title';
 
     const closeButton = document.createElement('button');
+    closeButton.className = 'remove-tab-button';
     closeButton.textContent = 'x';
     closeButton.addEventListener('click', () => this.closeTab(tab));
     tab.appendChild(title);
