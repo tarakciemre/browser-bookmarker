@@ -3,14 +3,23 @@ import { EventDispatcher, renderListener } from "./eventInterfaces";
 class RenderDispatcher implements EventDispatcher{
     observers: renderListener[]
     private tabsContainer: HTMLElement;
+    private static instance: RenderDispatcher | null = null;
 
-    constructor() {
+
+    private constructor() {
       this.observers = []
       this.tabsContainer = document.querySelector('.tab-bar')!;
 
       this.tabsContainer.querySelectorAll('.tab').forEach((tab) => {
         tab.addEventListener('click', () => this.activateTab(tab));
       });
+    }
+
+    public static getInstance(): RenderDispatcher {
+      if (!RenderDispatcher.instance) {
+        RenderDispatcher.instance = new RenderDispatcher();
+      }
+      return RenderDispatcher.instance;
     }
     
     addObserver(observer: renderListener): void {
@@ -32,6 +41,4 @@ class RenderDispatcher implements EventDispatcher{
       this.notifyRender(tab.getAttribute("id"))
     }
 }
-  
-  
   
