@@ -1,5 +1,4 @@
 export class BookMark{
-    id: number;
     siteName: string;
     link: string;
     addDate: Date;
