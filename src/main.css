@@ -3,6 +3,11 @@
     padding: 0;
 }
 
+body {
+    width: 100%;
+    height: 100%;
+}
+
 .top-section {
     height: 20vh;
     min-height: 20vh;
@@ -36,6 +41,10 @@
     background-color: #727272;
 }
 
+.tab-active:hover {
+    background-color: #727272 !important;
+}
+
 .main-bar {
     display: flex;
     min-height: 7vh;
@@ -45,18 +54,19 @@
 .add-tab-button {
     min-height: 6vh;
     min-width: 6vh;
-    margin-left: 30px;
     background-color: transparent;
     border: none;
+    border-radius: 20px;
 }
 
 .add-tab-button:hover {
-    background-color: #727272;
+    background-color: #d3d3d3;
 }
 
 .nav-buttons {
     display: flex;
     align-items: center;
+    margin-right: 20px;
 }
 
 .nav-button {
@@ -65,10 +75,11 @@
     background-color: transparent;
     border: 50px;
     padding: 10px;
+    transition: background-color 0.2s ease;
 }
 
 .nav-button:hover {
-    background-color: #b3b3b3;
+    background-color: #dddddd;
 }
 
 .search-container {
@@ -79,8 +90,8 @@
 /* Style for the search bar input */
 #search-bar {
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
+    border: 1px solid #7c7c7c;
+    border-radius: 20px 0 0 20px;
     font-size: 16px;
     width: 100%;
 }
@@ -89,19 +100,35 @@
 #search-button {
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 20px;
-    background-color: #4CAF50;
+    border-radius: 0 20px 20px 0;
+    background-color: #303cdf;
     color: #fff;
     cursor: pointer;
     font-size: 16px;
 }
 
+.remove-tab-button {
+    background-color: transparent;
+    border: none;
+}
+
+.remove-tab-button:hover {
+    background-color: #bbbbbb;
+}
+
+
 /* Hover effect for the search button */
 #search-button:hover {
-    background-color: #45a049;
+    background-color: #252fb7;
 }
 
 .bookmark-bar {
     min-height: 6vh;
     background-color: black;
+}
+
+.main-window {
+    display:inline-flex;
+    width: 100%;
+    height: 79.5vh;
 }

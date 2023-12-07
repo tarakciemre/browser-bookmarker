@@ -18,15 +18,15 @@
       <nav class="tab-bar">
         <div class="tab tab-active">
           <h4>Title</h4>
-          <button>x</button>
+          <button class="remove-tab-button">x</button>
         </div>
         <div class="tab">
           <h4>Title</h4>
-          <button>x</button>
+          <button class="remove-tab-button">x</button>
         </div>
         <div class="tab">
           <h4>Title</h4>
-          <button>x</button>
+          <button class="remove-tab-button">x</button>
         </div>
         <button class="add-tab-button">
           <img width="25px" src="assets/icons/plus.svg" alt="Search Icon">
@@ -48,12 +48,17 @@
         </div>
         <div class="search-container">
           <input type="text" id="search-bar" placeholder="Search...">
-          <button type="button" id="search-button">Search</button>
+          <button type="button" id="search-button">
+            <img width="25px" src="assets/icons/search.svg" alt="Search Icon">
+          </button>
         </div>
       </div>
       <div class="bookmark-bar">
         <div class="bookmark"></div>
       </div>
+    </div>
+    <div id="webview-container">
+      <webview id="webwiew-object" class="main-window" src="https://www.github.com/"></webview>
     </div>
   </body>
   <script src="node_modules/electron-tabs/dist/electron-tabs.js"></script>
