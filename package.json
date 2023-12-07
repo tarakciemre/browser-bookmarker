@@ -1,30 +1,27 @@
 {
-  "name": "electron-quick-start-typescript",
+  "name": "svelte-app",
   "version": "1.0.0",
-  "description": "A minimal Electron application written with Typescript",
+  "private": true,
+  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
-    "lint": "eslint -c .eslintrc --ext .ts ./src",
-    "start": "npm run build && electron ./dist/main.js"
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start-typescript",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo",
-    "typescript"
-  ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
-    "electron": "^24.3.0",
-    "eslint": "^7.32.0",
-    "typescript": "^4.8.3"
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-terser": "^0.4.0",
+    "electron": "^28.0.0",
+    "rollup": "^3.15.0",
+    "rollup-plugin-css-only": "^4.3.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.1.2",
+    "svelte": "^3.55.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@rollup/plugin-replace": "^5.0.5",
+    "sirv-cli": "^2.0.0"
+  }
 }
