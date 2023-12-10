@@ -11,13 +11,14 @@ export class Tab implements renderListener{
     constructor(id: number, element: Element){
         this.id = id;
         this.history = new SearchHistory();
+        this.element = element
         RenderDispatcher.getInstance().addObserver(this);
     }
 
-    onTabActivation(id: String): void {
-        if(this.id === Number(id)){
+    onTabActivation(id: number): void {
+        if(this.id === id){
             const link = this.history.getCurrent();
-            renderUrl(link);
+            renderUrl("https://www.youtube.com/");
             this.element.classList.add("tab-active")
             return
         }

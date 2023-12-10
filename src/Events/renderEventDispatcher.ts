@@ -19,8 +19,8 @@ export class RenderDispatcher implements EventDispatcher{
     }
 
     addTabAction(tab:Element) {
-      tab.addEventListener('click', () => this.activateTab(tab));
-      this.activateTab(tab)
+      tab.addEventListener('click', () => this.activateTab(Number(tab.getAttribute("id"))));
+      this.activateTab(Number(tab.getAttribute("id")))
     }
     
     addObserver(observer: renderListener): void {
@@ -32,15 +32,15 @@ export class RenderDispatcher implements EventDispatcher{
         this.observers.splice(indexToRemove, 1);
       }
     }
-    notifyTabActivation(id: String): void {
+    notifyTabActivation(id: number): void {
       this.observers.map(o=> {
         o.onTabActivation(id)
       })
     }
 
 
-    private activateTab(tab:Element) {
-      this.notifyTabActivation(tab.getAttribute("id"))
+    private activateTab(id:number) {
+      this.notifyTabActivation(id)
     }
 }
   

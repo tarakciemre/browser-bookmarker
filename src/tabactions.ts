@@ -26,8 +26,7 @@ class TabManager {
     const tab = document.createElement('div');
     tab.className = 'tab fade-in tab-active';
     tab.id = `${this.currentTab}`;
-    this.dispatcher.addTabAction(tab)
-
+    
     const title = document.createElement('h4');
     title.textContent = 'Title';
 
@@ -40,6 +39,8 @@ class TabManager {
     this.tabsContainer.insertBefore(tab, this.addTabButton);
 
     this.appManager.addTab(this.currentTab, tab);
+    this.dispatcher.addTabAction(tab)
+
     this.currentTab++;
   }
 
