@@ -8,9 +8,6 @@ export class AppManager implements renderListener {
 
     constructor() {
         this.tabs = []; // Creating an instance of the Tab class
-        const tab1 = new Tab(0);
-        this.tabs.push(tab1);
-        this.activeTab = tab1;
         RenderDispatcher.getInstance().addObserver(this);
     }
 
@@ -24,8 +21,8 @@ export class AppManager implements renderListener {
         return this.tabs[id];
     }
 
-    addTab(id: number): void {
-        const newTab = new Tab(id);
+    addTab(id: number, element: Element): void {
+        const newTab = new Tab(id, element);
         this.tabs.push(newTab);
         this.activeTab = newTab;
     }

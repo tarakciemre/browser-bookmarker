@@ -47,7 +47,7 @@ body {
 }
 
 .tab-active {
-    background-color: #727272;
+    background-color: #727272 !important;
 }
 
 .tab-active:hover {

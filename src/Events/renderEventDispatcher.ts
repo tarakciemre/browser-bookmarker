@@ -20,6 +20,7 @@ export class RenderDispatcher implements EventDispatcher{
 
     addTabAction(tab:Element) {
       tab.addEventListener('click', () => this.activateTab(tab));
+      this.activateTab(tab)
     }
     
     addObserver(observer: renderListener): void {
@@ -37,9 +38,6 @@ export class RenderDispatcher implements EventDispatcher{
       })
     }
 
-    addTabEvent(tab:Element) {
-      tab.addEventListener('click', () => this.activateTab(tab));
-    }
 
     private activateTab(tab:Element) {
       this.notifyTabActivation(tab.getAttribute("id"))

@@ -20,12 +20,13 @@ class TabManager {
     });
 
     this.appManager = new AppManager();
-    this.appManager.addTab(this.currentTab);
+    this.addNewTab()
   }  
   private addNewTab() {
     const tab = document.createElement('div');
-    tab.className = 'tab fade-in';
-    tab.id = `tab-${this.currentTab}`;
+    tab.className = 'tab fade-in tab-active';
+    tab.id = `${this.currentTab}`;
+    this.dispatcher.addTabAction(tab)
 
     const title = document.createElement('h4');
     title.textContent = 'Title';
@@ -38,7 +39,7 @@ class TabManager {
     tab.appendChild(closeButton);
     this.tabsContainer.insertBefore(tab, this.addTabButton);
 
-    // this.appManager.addTab(this.currentTab);
+    this.appManager.addTab(this.currentTab, tab);
     this.currentTab++;
   }
 
