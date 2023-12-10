@@ -30,12 +30,14 @@ export class Tab implements renderListener{
         this.history.add(url)
         this.destroy()
         this.webView = createWebView(url)
+        return url
     }
 
     goToPrevious() {
         this.destroy()
         const url = this.history.goBackward()
         this.webView = createWebView(url)
+        return url
     }
     
     goToNext() {
@@ -43,11 +45,13 @@ export class Tab implements renderListener{
         this.history.goForward()
         const url = this.history.getCurrent()
         this.webView = createWebView(url)
+        return url
     }
 
     reload() {
         this.destroy()
         this.webView = createWebView(this.history.getCurrent())
+        return this.history.getCurrent()
     }
 
     onTabActivation(id: number): void {
