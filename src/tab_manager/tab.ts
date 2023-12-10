@@ -22,6 +22,10 @@ export class Tab implements renderListener{
         parentElement.removeChild(this.webView);
     }
 
+    setTitle(url:string) {
+        
+    }
+
     searchWebURL(url:string) {
         this.history.add(url)
         this.destroy()

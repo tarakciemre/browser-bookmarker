@@ -10,7 +10,7 @@ export function createWebView(url:string) {
     return newWebView
 }
 
-export function renderUrl (webView:Node): void {
+export function renderUrl(webView:Node): void {
     const webviewId = 'webview-object';
 
     const existingWebView = document.getElementById(webviewId);

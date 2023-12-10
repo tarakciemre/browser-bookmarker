@@ -59,7 +59,9 @@ class TabManager {
   }
   private renderUrl() {
     const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
-    const url = searchBarInput.value;  
+    const url = searchBarInput.value;
+    const tabObject = this.appManager.activeTab
+    tabObject.searchWebURL(url)
   }
   private goBack() {
     const activeTab = this.appManager.activeTab;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 
-export async function setTitle(url: string): Promise<string> {
+export async function setElementTitle(url:string, element:HTMLElement): Promise<string> {
   try {
     const response = await axios.get(url);
 
@@ -9,7 +9,7 @@ export async function setTitle(url: string): Promise<string> {
 
     // Extract and return the title
     const title = $('head title').text();
-    return title;
+    element.innerHTML
   } catch (error) {
     return 'Error';
   }
