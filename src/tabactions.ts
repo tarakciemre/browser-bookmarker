@@ -5,6 +5,8 @@ class TabManager {
   private addTabButton: HTMLElement;
   private appManager: AppManager;
   private searchBar: HTMLElement;
+  private backButton: HTMLElement;
+  private forwardButton: HTMLElement;
   private currentTab = 4;
   private dispatcher: RenderDispatcher;
 
@@ -13,6 +15,8 @@ class TabManager {
     this.tabsContainer = document.querySelector('.tab-bar')!;
     this.addTabButton = document.querySelector('.add-tab-button')!; 
     this.searchBar = document.querySelector('.search-container')!;
+    this.backButton = document.querySelector('.back-button')!;
+    this.forwardButton = document.querySelector('.forward-button')!;
     this.searchBar.addEventListener('click', () => this.renderUrl());
     this.addTabButton.addEventListener('click', () => this.addNewTab());
     this.tabsContainer.querySelectorAll('.tab button').forEach((closeButton) => {
