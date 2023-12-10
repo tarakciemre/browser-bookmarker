@@ -1,7 +1,7 @@
 
 export class SearchHistory {
 
-    defaultPage: "https://www.google.com";
+    defaultPage = "https://www.google.com";
     historyArray: Array<string>;
     index: number;
 
@@ -11,12 +11,17 @@ export class SearchHistory {
     }
 
     getCurrent() {
+        var current;
         switch (this.index) {
             case -1:
-                return this.defaultPage;
+                current = this.defaultPage;
+                break;
             default:
-                return this.historyArray[this.index];
+                current = this.historyArray[this.index];
+                break;
         }
+        console.log(current);
+        return current;
     }
 
     getBackward() {
@@ -26,7 +31,7 @@ export class SearchHistory {
             case 0:
                 return this.defaultPage;
             default:
-                return this.historyArray[this.index + 1];
+                return this.historyArray[this.index - 1];
         }
     }
 
