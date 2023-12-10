@@ -33,11 +33,16 @@ export class Tab implements renderListener{
     }
 
     goToPrevious() {
-
+        this.destroy()
+        const url = this.history.goBackward()
+        this.webView = createWebView(url)
     }
     
     goToNext() {
-
+        this.destroy()
+        this.history.goForward()
+        const url = this.history.getCurrent()
+        this.webView = createWebView(url)
     }
 
     onTabActivation(id: number): void {

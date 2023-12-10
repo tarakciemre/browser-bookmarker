@@ -57,7 +57,7 @@ export class SearchHistory {
 
     add(link: string) {
         this.index = this.index + 1;
-        this.historyArray.slice(0, this.index);
+        this.historyArray = this.historyArray.slice(0, this.index);
         this.historyArray.push(link);
     }
 }

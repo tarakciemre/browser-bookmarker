@@ -9,7 +9,7 @@ export async function setElementTitle(url:string, element:HTMLElement): Promise<
 
     // Extract and return the title
     const title = $('head title').text();
-    element.innerHTML
+    element.innerHTML = title
   } catch (error) {
     return 'Error';
   }
