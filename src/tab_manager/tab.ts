@@ -14,7 +14,7 @@ export class Tab implements renderListener{
         this.history = new SearchHistory();
         this.element = element
         RenderDispatcher.getInstance().addObserver(this);
-        this.webView = createWebView("https://www.youtube.com/")
+        this.webView = createWebView(this.history.getCurrent());
     }
 
     destroy() {
@@ -33,11 +33,16 @@ export class Tab implements renderListener{
     }
 
     goToPrevious() {
-
+        this.destroy()
+        const url = this.history.goBackward()
+        this.webView = createWebView(url)
     }
     
     goToNext() {
-
+        this.destroy()
+        this.history.goForward()
+        const url = this.history.getCurrent()
+        this.webView = createWebView(url)
     }
 
     onTabActivation(id: number): void {
