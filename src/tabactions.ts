@@ -29,7 +29,9 @@ class TabManager {
     });
 
     this.appManager = new AppManager();
-    this.addNewTab()
+
+    
+    this.openBookMarkTab()
   }  
   private addNewTab() {
     const tab = document.createElement('div');
@@ -46,10 +48,32 @@ class TabManager {
     tab.appendChild(title);
     tab.appendChild(closeButton);
     tab.addEventListener('click', () => this.changeUrl(Number(tab.getAttribute("id"))));
-
+    
     this.tabsContainer.insertBefore(tab, this.addTabButton);
 
     this.appManager.addTab(this.currentTab, tab);
+    this.dispatcher.addTabAction(tab)
+
+    this.currentTab++;
+  }
+
+  private openBookMarkTab() {
+    const tab = document.createElement('div');
+    tab.className = 'tab fade-in tab-active';
+    tab.id = `${this.currentTab}`;
+    
+    const title = document.createElement('p');
+    title.textContent = 'Title';
+
+    const closeButton = document.createElement('button');
+    closeButton.className = 'remove-tab-button';
+    closeButton.textContent = 'x';
+    closeButton.addEventListener('click', () => this.closeTab(tab));
+    tab.appendChild(title);
+    tab.appendChild(closeButton);
+    this.tabsContainer.insertBefore(tab, this.addTabButton);
+
+    this.appManager.addBookmarkTab(this.currentTab, tab);
     this.dispatcher.addTabAction(tab)
 
     this.currentTab++;
@@ -80,7 +104,6 @@ class TabManager {
     const url = activeTab.goToNext();
     const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
     searchBarInput.value = url;
-
   }
   private reload() {
     const activeTab = this.appManager.activeTab;

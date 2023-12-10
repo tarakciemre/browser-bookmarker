@@ -1,6 +1,7 @@
 import { renderListener } from '../Events/eventInterfaces';
 import { Tab } from './tab'; // Import the Tab class from tab.ts
 import { RenderDispatcher } from "../Events/renderEventDispatcher";
+import { BookmarkTab } from './bookmarkTab';
 
 export class AppManager implements renderListener {
     tabs: Tab[] = [];
@@ -23,6 +24,12 @@ export class AppManager implements renderListener {
 
     addTab(id: number, element: Element): void {
         const newTab = new Tab(id, element);
+        this.tabs.push(newTab);
+        this.activeTab = newTab;
+    }
+
+    addBookmarkTab(id: number, element: Element): void {
+        const newTab = new BookmarkTab(id, element);
         this.tabs.push(newTab);
         this.activeTab = newTab;
     }
