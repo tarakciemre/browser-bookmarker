@@ -1,5 +1,6 @@
 import { RenderDispatcher } from "./Events/renderEventDispatcher";
 import { AppManager } from "./tab_manager/app_manager";
+import{ processString } from "./StringManipulation/link_processor";
 class TabManager {
   private tabsContainer: HTMLElement;
   private addTabButton: HTMLElement;
@@ -64,7 +65,8 @@ class TabManager {
     const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
     const url = searchBarInput.value;
     const tabObject = this.appManager.activeTab
-    tabObject.searchWebURL(url)
+    const alteredUrl = processString(url);
+    tabObject.searchWebURL(alteredUrl)
   }
   private goBack() {
     const activeTab = this.appManager.activeTab;
