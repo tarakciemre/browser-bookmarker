@@ -22,6 +22,20 @@ export class Tab implements renderListener{
         parentElement.removeChild(this.webView);
     }
 
+    searchWebURL(url:string) {
+        this.history.add(url)
+        this.destroy()
+        this.webView = createWebView(url)
+    }
+
+    goToPrevious() {
+
+    }
+    
+    goToNext() {
+
+    }
+
     onTabActivation(id: number): void {
         if(this.id === id){
             //const link = this.history.getCurrent();

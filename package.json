@@ -7,7 +7,7 @@
     "watch": "tsc -w",
     "lint": "eslint -c .eslintrc --ext .ts ./src",
     "start": "npm run build && electron ./dist/main.js",
-	 "begin": "tsc && npx webpack --config webpack.config.js && npm run build && electron ./dist/main.js"
+    "begin": "tsc && npx webpack --config webpack.config.js && npm run build && electron ./dist/main.js"
   },
   "repository": "https://github.com/electron/electron-quick-start-typescript",
   "keywords": [
@@ -30,6 +30,8 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "axios": "^1.6.2",
+    "cheerio": "^1.0.0-rc.12",
     "electron-tabs": "^1.0.2",
     "ts-loader": "^9.5.1"
   }
