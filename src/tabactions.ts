@@ -1,17 +1,24 @@
+import { RenderDispatcher } from "./Events/renderEventDispatcher";
 import { AppManager } from "./tab_manager/app_manager";
 class TabManager {
   private tabsContainer: HTMLElement;
   private addTabButton: HTMLElement;
   private appManager: AppManager;
   private currentTab = 4;
+  private dispatcher: RenderDispatcher;
 
   constructor() {
+    this.dispatcher = RenderDispatcher.getInstance();
     this.tabsContainer = document.querySelector('.tab-bar')!;
     this.addTabButton = document.querySelector('.add-tab-button')!; 
     this.addTabButton.addEventListener('click', () => this.addNewTab());
     this.tabsContainer.querySelectorAll('.tab button').forEach((closeButton) => {
       closeButton.addEventListener('click', () => this.closeTab(closeButton.parentElement!));
     });
+    this.tabsContainer.querySelectorAll('.tab').forEach((tab) => {
+      this.dispatcher.addTabAction(tab)
+    });
+
     this.appManager = new AppManager();
     this.appManager.addTab(this.currentTab);
   }  

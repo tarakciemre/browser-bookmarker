@@ -14,7 +14,7 @@ export class AppManager implements renderListener {
         RenderDispatcher.getInstance().addObserver(this);
     }
 
-    onRender(id: String): void {
+    onTabActivation(id: String): void {
         this.activeTab = this.tabs.find(tab => tab.id === Number(id));
         console.log(this.activeTab.id);
     }

@@ -9,10 +9,6 @@ export class RenderDispatcher implements EventDispatcher{
     private constructor() {
       this.observers = []
       this.tabsContainer = document.querySelector('.tab-bar')!;
-
-      this.tabsContainer.querySelectorAll('.tab').forEach((tab) => {
-        tab.addEventListener('click', () => this.activateTab(tab));
-      });
     }
 
     public static getInstance(): RenderDispatcher {
@@ -20,6 +16,10 @@ export class RenderDispatcher implements EventDispatcher{
         RenderDispatcher.instance = new RenderDispatcher();
       }
       return RenderDispatcher.instance;
+    }
+
+    addTabAction(tab:Element) {
+      tab.addEventListener('click', () => this.activateTab(tab));
     }
     
     addObserver(observer: renderListener): void {
@@ -31,9 +31,9 @@ export class RenderDispatcher implements EventDispatcher{
         this.observers.splice(indexToRemove, 1);
       }
     }
-    notifyRender(id: String): void {
+    notifyTabActivation(id: String): void {
       this.observers.map(o=> {
-        o.onRender(id)
+        o.onTabActivation(id)
       })
     }
 
@@ -42,7 +42,7 @@ export class RenderDispatcher implements EventDispatcher{
     }
 
     private activateTab(tab:Element) {
-      this.notifyRender(tab.getAttribute("id"))
+      this.notifyTabActivation(tab.getAttribute("id"))
     }
 }
   

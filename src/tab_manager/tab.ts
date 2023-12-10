@@ -13,7 +13,7 @@ export class Tab implements renderListener{
         RenderDispatcher.getInstance().addObserver(this);
     }
 
-    onRender(id: String): void {
+    onTabActivation(id: String): void {
         if(this.id === Number(id)){
             const link = this.history.getCurrent();
             renderUrl(link);
