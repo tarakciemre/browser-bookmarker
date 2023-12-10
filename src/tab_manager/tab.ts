@@ -26,21 +26,21 @@ export class Tab implements renderListener{
         
     }
 
-    searchWebURL(url:string) {
+    searchWebURL(url:string): string {
         this.history.add(url)
         this.destroy()
         this.webView = createWebView(url)
         return url
     }
 
-    goToPrevious() {
+    goToPrevious(): string {
         this.destroy()
         const url = this.history.goBackward()
         this.webView = createWebView(url)
         return url
     }
     
-    goToNext() {
+    goToNext(): string{
         this.destroy()
         this.history.goForward()
         const url = this.history.getCurrent()
@@ -48,7 +48,7 @@ export class Tab implements renderListener{
         return url
     }
 
-    reload() {
+    reload(): string {
         this.destroy()
         this.webView = createWebView(this.history.getCurrent())
         return this.history.getCurrent()
