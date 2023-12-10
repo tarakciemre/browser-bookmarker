@@ -5,8 +5,7 @@ class TabManager {
   private addTabButton: HTMLElement;
   private appManager: AppManager;
   private searchBar: HTMLElement;
-  private backButton: HTMLElement;
-  private forwardButton: HTMLElement;
+  private forwardBackButtons: HTMLElement;
   private currentTab = 4;
   private dispatcher: RenderDispatcher;
 
@@ -15,8 +14,9 @@ class TabManager {
     this.tabsContainer = document.querySelector('.tab-bar')!;
     this.addTabButton = document.querySelector('.add-tab-button')!; 
     this.searchBar = document.querySelector('.search-container')!;
-    this.backButton = document.querySelector('.back-button')!;
-    this.forwardButton = document.querySelector('.forward-button')!;
+    this.forwardBackButtons = document.querySelector('.nav-buttons')!;
+    this.forwardBackButtons.querySelector('#left')!.addEventListener('click', () => this.goBack());
+    this.forwardBackButtons.querySelector('#right')!.addEventListener('click', () => this.goNext());
     this.searchBar.addEventListener('click', () => this.renderUrl());
     this.addTabButton.addEventListener('click', () => this.addNewTab());
     this.tabsContainer.querySelectorAll('.tab button').forEach((closeButton) => {
@@ -49,6 +49,7 @@ class TabManager {
     this.dispatcher.addTabAction(tab)
 
     this.currentTab++;
+
   }
 
   private closeTab(tab: HTMLElement) {
@@ -59,6 +60,14 @@ class TabManager {
   private renderUrl() {
     const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
     const url = searchBarInput.value;  
+  }
+  private goBack() {
+    const activeTab = this.appManager.activeTab;
+    activeTab.goToPrevious();
+  }
+  private goNext() {
+    const activeTab = this.appManager.activeTab;
+    activeTab.goToNext();
   }
   
 }
