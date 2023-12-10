@@ -18,7 +18,7 @@ export class AppManager implements renderListener {
 
     // Example method that uses the Tab instance
     getTab(id: number): Tab {
-        return this.tabs[id];
+        return this.tabs.find((tab) => tab.id === id);
     }
 
     addTab(id: number, element: Element): void {

@@ -46,6 +46,8 @@ class TabManager {
 
   private closeTab(tab: HTMLElement) {
     this.tabsContainer.removeChild(tab);
+    const tabObject = this.appManager.getTab(Number(tab.id))
+    tabObject.destroy()
   }
 }
 
