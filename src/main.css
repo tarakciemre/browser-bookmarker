@@ -54,13 +54,7 @@ body {
 .tab-active {
     background-color: #DEE1E6 !important;
     border-radius: 10px 10px 0 0;
-    /* background-color: #303443; */
-    /* background-color: !important; */
 }
-
-/* .tab-active:hover { */
-/*     background-color: #303443 !important; */
-/* } */
 
 .main-bar {
     display: flex;
@@ -105,16 +99,16 @@ body {
     width: 100%;
 }
 
-/* Style for the search bar input */
 #search-bar {
     padding: 10px;
-    border: 1px solid #7c7c7c;
+    padding-left: 20px;
+    border: 1px solid #dddddd;
     border-radius: 20px 0 0 20px;
     font-size: 16px;
     width: 100%;
+    box-shadow: inset 2px 0 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Style for the search button */
 #search-button {
     padding: 10px;
     border: 1px solid #ccc;
@@ -135,7 +129,6 @@ body {
 }
 
 
-/* Hover effect for the search button */
 #search-button:hover {
     background-color: #252fb7;
 }
