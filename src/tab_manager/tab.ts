@@ -45,6 +45,11 @@ export class Tab implements renderListener{
         this.webView = createWebView(url)
     }
 
+    reload() {
+        this.destroy()
+        this.webView = createWebView(this.history.getCurrent())
+    }
+
     onTabActivation(id: number): void {
         if(this.id === id){
             //const link = this.history.getCurrent();
