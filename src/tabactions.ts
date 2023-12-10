@@ -18,7 +18,6 @@ class TabManager {
     this.forwardBackButtons.querySelector('#left')!.addEventListener('click', () => this.goBack());
     this.forwardBackButtons.querySelector('#right')!.addEventListener('click', () => this.goNext());
     this.forwardBackButtons.querySelector('#reload')!.addEventListener('click', () => this.reload());
-    this.searchBar.addEventListener('click', () => this.renderUrl());
     this.searchBar.querySelector("#search-button").addEventListener('click', () => this.renderUrl());
     this.addTabButton.addEventListener('click', () => this.addNewTab());
     this.tabsContainer.querySelectorAll('.tab button').forEach((closeButton) => {
@@ -45,6 +44,8 @@ class TabManager {
     closeButton.addEventListener('click', () => this.closeTab(tab));
     tab.appendChild(title);
     tab.appendChild(closeButton);
+    tab.addEventListener('click', () => this.changeUrl(Number(tab.getAttribute("id"))));
+
     this.tabsContainer.insertBefore(tab, this.addTabButton);
 
     this.appManager.addTab(this.currentTab, tab);
@@ -67,17 +68,28 @@ class TabManager {
   }
   private goBack() {
     const activeTab = this.appManager.activeTab;
-    activeTab.goToPrevious();
+    const url = activeTab.goToPrevious();
+    const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
+    searchBarInput.value = url;
+
   }
   private goNext() {
     const activeTab = this.appManager.activeTab;
-    activeTab.goToNext();
+    const url = activeTab.goToNext();
+    const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
+    searchBarInput.value = url;
+
   }
   private reload() {
     const activeTab = this.appManager.activeTab;
     activeTab.reload();
   }
-  
+  private changeUrl(id: number) {
+    const activeTab = this.appManager.getTab(id);
+    const url = activeTab.history.getCurrent();
+    const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
+    searchBarInput.value = url;  
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
