@@ -3,6 +3,10 @@ import { BookMark } from "./bookmark";
 export class BookMarkManager{
     bookmarks: BookMark[] = [];
 
+    constructor(){
+        this.bookmarks = []
+    }
+
     getBookMark(link: string): BookMark{
         const foundBookmark = this.bookmarks.find(bookmark => bookmark.link === link);
 
