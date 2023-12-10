@@ -17,6 +17,8 @@ class TabManager {
     this.forwardBackButtons = document.querySelector('.nav-buttons')!;
     this.forwardBackButtons.querySelector('#left')!.addEventListener('click', () => this.goBack());
     this.forwardBackButtons.querySelector('#right')!.addEventListener('click', () => this.goNext());
+    this.forwardBackButtons.querySelector('#reload')!.addEventListener('click', () => this.reload());
+    this.searchBar.addEventListener('click', () => this.renderUrl());
     this.searchBar.querySelector("#search-button").addEventListener('click', () => this.renderUrl());
     this.addTabButton.addEventListener('click', () => this.addNewTab());
     this.tabsContainer.querySelectorAll('.tab button').forEach((closeButton) => {
@@ -70,6 +72,10 @@ class TabManager {
   private goNext() {
     const activeTab = this.appManager.activeTab;
     activeTab.goToNext();
+  }
+  private reload() {
+    const activeTab = this.appManager.activeTab;
+    activeTab.reload();
   }
   
 }
