@@ -4,6 +4,7 @@ class TabManager {
   private tabsContainer: HTMLElement;
   private addTabButton: HTMLElement;
   private appManager: AppManager;
+  private searchBar: HTMLElement;
   private currentTab = 4;
   private dispatcher: RenderDispatcher;
 
@@ -11,6 +12,8 @@ class TabManager {
     this.dispatcher = RenderDispatcher.getInstance();
     this.tabsContainer = document.querySelector('.tab-bar')!;
     this.addTabButton = document.querySelector('.add-tab-button')!; 
+    this.searchBar = document.querySelector('.search-container')!;
+    this.searchBar.addEventListener('click', () => this.renderUrl());
     this.addTabButton.addEventListener('click', () => this.addNewTab());
     this.tabsContainer.querySelectorAll('.tab button').forEach((closeButton) => {
       closeButton.addEventListener('click', () => this.closeTab(closeButton.parentElement!));
@@ -49,8 +52,12 @@ class TabManager {
     const tabObject = this.appManager.getTab(Number(tab.id))
     tabObject.destroy()
   }
+  private renderUrl() {
+    const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
+    const url = searchBarInput.value;  
+  }
+  
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
   const tabManager = new TabManager();
