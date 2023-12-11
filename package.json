@@ -30,10 +30,12 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "@types/node": "^20.10.4",
     "axios": "^1.6.2",
     "cheerio": "^1.0.0-rc.12",
     "electron-tabs": "^1.0.2",
     "openai": "^4.20.1",
+    "os": "^0.1.2",
     "ts-loader": "^9.5.1"
   }
 }

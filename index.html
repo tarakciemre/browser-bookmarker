@@ -11,49 +11,75 @@
       http-equiv="X-Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
     />
-    <link rel="stylesheet" href="src/main.css">
+    <link rel="stylesheet" href="src/main.css" />
   </head>
   <body>
     <div class="top-section">
       <nav class="tab-bar">
         <button class="add-tab-button">
-          <img width="25px" src="assets/icons/plus.svg" alt="Search Icon">
+          <img width="25px" src="assets/icons/plus.svg" alt="Search Icon" />
         </button>
       </nav>
       <div class="main-bar">
         <div class="nav-search">
           <div class="nav-buttons">
-            <button class="nav-button" id = "left">
-              <img width="25px" src="assets/icons/left.svg" alt="Search Icon">
+            <button class="nav-button" id="left">
+              <img width="25px" src="assets/icons/left.svg" alt="Search Icon" />
             </button>
-            <button class="nav-button" id = "right">
-              <img width="25px" src="assets/icons/right.svg" alt="Search Icon">
+            <button class="nav-button" id="right">
+              <img
+                id="star-image"
+                width="25px"
+                src="assets/icons/right.svg"
+                alt="Search Icon"
+              />
             </button>
-            <button class="nav-button" id = "reload">
-              <img width="25px" src="assets/icons/reload.svg" alt="Search Icon">
+            <button class="nav-button" id="reload">
+              <img
+                width="25px"
+                src="assets/icons/reload.svg"
+                alt="Search Icon"
+              />
             </button>
-          <div id = "dropdown-container">
-              <button class="nav-button" id = "star-button">
-                <img id = "star-image" width="25px" src="assets/icons/star_empty.png" alt="Search Icon">
+
+            <button class="star" id="star-button">
+              <img
+                width="25px"
+                src="assets/icons/star_empty.png"
+                alt="Search Icon"
+              />
+            </button>
+            <div id="dropdown-container">
+              <button class="nav-button" id="recommendation-button">
+                <img
+                  id="recommendation-image"
+                  width="25px"
+                  src="assets/icons/star_empty.png"
+                  alt="Search Icon"
+                />
               </button>
-              <ul id = "star-dropdown" >
-                <li id = "bookmark">Bookmark</li>
-                <li id = "history">History</li>
+              <ul id="recommendation-dropdown">
+                <li id="bookmark">Bookmark</li>
+                <li id="history">History</li>
               </ul>
-          </div>
+            </div>
           </div>
         </div>
         <div class="search-container">
-          <input type="text" id="search-bar" placeholder="Search...">
+          <input type="text" id="search-bar" placeholder="Search..." />
           <button type="button" id="search-button">Search</button>
         </div>
-        <button class="nav-button" id = "bookmark-button">
-          <img width="25px" src="assets/icons/book.png" alt="Search Icon">
+        <button class="nav-button" id="bookmark-button">
+          <img width="25px" src="assets/icons/book.png" alt="Search Icon" />
         </button>
       </div>
     </div>
     <div id="webview-container">
-      <webview class="main-window no-display" id="webview-object" src="https://www.github.com/"></webview>
+      <webview
+        class="main-window no-display"
+        id="webview-object"
+        src="https://www.github.com/"
+      ></webview>
     </div>
   </body>
   <script src="./dist/bundle.js"></script>
