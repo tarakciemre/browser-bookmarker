@@ -25,15 +25,8 @@ export class Tab implements renderListener{
     
     setTitle() {
         try {
-            const urlObject = new URL(this.getURL());
-            const hostname = urlObject.hostname;
-            let siteName;
-            this.getURL().includes("www")?
-                siteName = hostname.split('.')[1]:
-                siteName = hostname.split('.')[0]
-
             const title:HTMLElement = this.element.querySelector(".tab-title")
-            title.innerText = siteName.charAt(0).toUpperCase() + siteName.slice(1)
+            title.innerText = this.getTitle()
           } catch (error) {
             const title:HTMLElement = this.element.querySelector(".tab-title")
             title.innerText = ""
@@ -67,6 +60,15 @@ export class Tab implements renderListener{
 
     getURL(): string {
         return this.history.getCurrent()
+    }
+    getTitle() {
+        const urlObject = new URL(this.getURL());
+        const hostname = urlObject.hostname;
+        let siteName;
+        this.getURL().includes("www")?
+            siteName = hostname.split('.')[1]:
+            siteName = hostname.split('.')[0]
+        return siteName.charAt(0).toUpperCase() + siteName.slice(1)
     }
 
     reload(): string {

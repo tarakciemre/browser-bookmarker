@@ -21,7 +21,14 @@ export class BookMarkManager{
     }
 
     addBookMark(url:string): void{
-        const newBookmark = new BookMark("", url)
+        const urlObject = new URL(url);
+        const hostname = urlObject.hostname;
+        let siteName;
+        url.includes("www")?
+            siteName = hostname.split('.')[1]:
+            siteName = hostname.split('.')[0]
+        siteName = siteName.charAt(0).toUpperCase() + siteName.slice(1)
+        const newBookmark = new BookMark(siteName, url)
         this.bookmarks.push(newBookmark);
     }
 
