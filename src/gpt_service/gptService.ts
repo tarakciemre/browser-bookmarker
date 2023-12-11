@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 
-const OPENAI_API_KEY = "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"
+const OPENAI_API_KEY = "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"
 const requestOptions: { temperature: number } = {
   temperature: 0,
 };
