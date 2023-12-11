@@ -7,7 +7,7 @@ export class Tab implements renderListener{
     history: SearchHistory;
     id: number;
     element:Element
-    webView:Element
+    webView:any
 
     constructor(id: number, element: Element){
         this.id = id;
@@ -15,21 +15,36 @@ export class Tab implements renderListener{
         this.element = element
         RenderDispatcher.getInstance().addObserver(this);
         this.webView = createWebView(this.history.getCurrent());
+        this.setTitle()
     }
 
     destroy() {
         const parentElement = document.getElementById('webview-container');
         parentElement.removeChild(this.webView);
     }
+    
+    setTitle() {
+        try {
+            const urlObject = new URL(this.getURL());
+            const hostname = urlObject.hostname;
+            let siteName;
+            this.getURL().includes("www")?
+                siteName = hostname.split('.')[1]:
+                siteName = hostname.split('.')[0]
 
-    setTitle(url:string) {
-        
+            const title:HTMLElement = this.element.querySelector(".tab-title")
+            title.innerText = siteName.charAt(0).toUpperCase() + siteName.slice(1)
+          } catch (error) {
+            const title:HTMLElement = this.element.querySelector(".tab-title")
+            title.innerText = ""
+        }
     }
 
     searchWebURL(url:string): string {
         this.history.add(url)
         this.destroy()
         this.webView = createWebView(url)
+        this.setTitle()
         return url
     }
 
@@ -37,6 +52,7 @@ export class Tab implements renderListener{
         this.destroy()
         const url = this.history.goBackward()
         this.webView = createWebView(url)
+        this.setTitle()
         return url
     }
     
@@ -45,7 +61,12 @@ export class Tab implements renderListener{
         this.history.goForward()
         const url = this.history.getCurrent()
         this.webView = createWebView(url)
+        this.setTitle()
         return url
+    }
+
+    getURL(): string {
+        return this.history.getCurrent()
     }
 
     reload(): string {

@@ -2,6 +2,7 @@ import { renderListener } from '../Events/eventInterfaces';
 import { Tab } from './tab'; // Import the Tab class from tab.ts
 import { RenderDispatcher } from "../Events/renderEventDispatcher";
 import { BookmarkTab } from './bookmarkTab';
+import { BookMark } from '../bookmark_manager/bookmark';
 
 export class AppManager implements renderListener {
     tabs: Tab[] = [];
@@ -14,7 +15,6 @@ export class AppManager implements renderListener {
 
     onTabActivation(id: number): void {
         this.activeTab = this.tabs.find(tab => tab.id === id);
-        console.log(this.activeTab.id);
     }
 
     // Example method that uses the Tab instance
@@ -28,8 +28,8 @@ export class AppManager implements renderListener {
         this.activeTab = newTab;
     }
 
-    addBookmarkTab(id: number, element: Element): void {
-        const newTab = new BookmarkTab(id, element);
+    addBookmarkTab(id: number, element: Element, bookmarks: BookMark[]): void {
+        const newTab = new BookmarkTab(id, element, bookmarks);
         this.tabs.push(newTab);
         this.activeTab = newTab;
     }

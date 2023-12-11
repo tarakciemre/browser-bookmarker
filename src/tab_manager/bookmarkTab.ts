@@ -1,3 +1,4 @@
+import { BookMark } from "../bookmark_manager/bookmark";
 import { createBookmarkView } from "../Controllers/bookmarkController";
 import { Tab } from "./tab";
 
@@ -5,12 +6,13 @@ export class BookmarkTab extends Tab {
     id: number;
     element:Element
     webView:Element
+    bookmarks: BookMark[]
 
-    constructor(id: number, element: Element){
+    constructor(id: number, element: Element, bookmarks: BookMark[]){
         super(id, element)
-        this.history = undefined
         this.destroy()
-        this.webView = createBookmarkView()
+        this.bookmarks = bookmarks
+        this.webView = createBookmarkView(bookmarks)
     }
 
     destroy() {
@@ -18,8 +20,12 @@ export class BookmarkTab extends Tab {
         parentElement.removeChild(this.webView);
     }
 
-    setTitle(url:string) {
+    setTitle() {
         
+    }
+
+    getURL() {
+        return ""
     }
 
     searchWebURL(url:string): string {
@@ -36,7 +42,7 @@ export class BookmarkTab extends Tab {
 
     reload(): string {
         this.destroy()
-        this.webView = createBookmarkView()
+        this.webView = createBookmarkView(this.bookmarks)
         return ""
     }
 

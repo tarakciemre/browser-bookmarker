@@ -1,10 +1,7 @@
-export function createBookmarkView() {
-    const bookmarksData = [
-        { name: 'Google', url: 'https://google.com' },
-        { name: 'X', url: 'https://x.com' },
-        { name: 'Youtube', url: 'https://youtube.com' },
-      ];
-      
+import { BookMark } from "../bookmark_manager/bookmark";
+
+export function createBookmarkView(bookmarksData:BookMark[]) {
+    
     const mainWindow = document.createElement('div');
     mainWindow.classList.add('main-window');
     
@@ -14,16 +11,16 @@ export function createBookmarkView() {
     const bookmarkList = document.createElement('ul');
     bookmarkList.classList.add('bookmark-list');
 
-    bookmarksData.forEach(bookmark => {
+    bookmarksData.forEach((bookmark:BookMark) => {
         const listItem = document.createElement('li');
 
         const bookmarkInfo = document.createElement('p');
-        bookmarkInfo.textContent = `${bookmark.name} (${bookmark.url})`;
+        bookmarkInfo.textContent = `${bookmark.siteName} (${bookmark.link})`;
 
         const generateButton = document.createElement('button');
         generateButton.textContent = 'Generate Similar Bookmarks';
 
-        generateButton.addEventListener('click', () => handleButtonClick(bookmark.url));
+        generateButton.addEventListener('click', () => handleButtonClick(bookmark.link));
 
         listItem.appendChild(bookmarkInfo);
         listItem.appendChild(generateButton);

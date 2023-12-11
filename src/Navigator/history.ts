@@ -20,7 +20,6 @@ export class SearchHistory {
                 current = this.historyArray[this.index];
                 break;
         }
-        console.log(current);
         return current;
     }
 
@@ -50,8 +49,6 @@ export class SearchHistory {
         if(this.getBackward()) {
             this.index = this.index - 1;
         }
-        console.log(this.historyArray);
-        console.log(this.index);
         return this.getCurrent();
     }
 
@@ -59,8 +56,6 @@ export class SearchHistory {
         if(this.getForward()) {
             this.index = this.index + 1;
         }
-        console.log(this.historyArray);
-        console.log(this.index);
         return this.getCurrent();
     }
 
@@ -68,7 +63,5 @@ export class SearchHistory {
         this.index = this.index + 1;
         this.historyArray = this.historyArray.slice(0, this.index);
         this.historyArray.push(link);
-        console.log(this.historyArray);
-        console.log(this.index);
     }
 }

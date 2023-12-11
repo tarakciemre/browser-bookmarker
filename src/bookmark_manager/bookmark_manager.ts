@@ -9,16 +9,20 @@ export class BookMarkManager{
 
     getBookMark(link: string): BookMark{
         const foundBookmark = this.bookmarks.find(bookmark => bookmark.link === link);
-
-        if (foundBookmark) {
-            return foundBookmark;
-        }   
-
-        return null; 
+        return foundBookmark
     }
 
-    addBookMark(newBookMark: BookMark): void{
-        this.bookmarks.push(newBookMark);
+    getAllBookmarks() {
+        return this.bookmarks;
+    }
+
+    isBookmarked(link: string):boolean {
+        return this.getBookMark(link) != undefined
+    }
+
+    addBookMark(url:string): void{
+        const newBookmark = new BookMark("", url)
+        this.bookmarks.push(newBookmark);
     }
 
     deleteBookMark(link: string): boolean {
