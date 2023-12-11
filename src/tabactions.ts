@@ -24,7 +24,7 @@ class TabManager {
     this.forwardBackButtons.querySelector('#reload')!.addEventListener('click', () => this.reload());
     this.searchBar.querySelector("#search-button").addEventListener('click', () => this.renderUrl());
 
-    document.querySelector('#star').addEventListener('click', () => this.addToBookMark());
+    document.querySelector('#star-button').addEventListener('click', () => this.addToBookMark());
     document.querySelector('#bookmark-button').addEventListener('click', () => this.openBookMarkTab());
 
 
@@ -40,6 +40,20 @@ class TabManager {
     this.bookmarkManager = new BookMarkManager();
 
     this.addNewTab()
+    document.getElementById("star-button").addEventListener("click", function() {
+      const list = document.getElementById("star-dropdown");
+      if ( list.style.display === "none" ) {
+        document.getElementById("star-dropdown").style.display = "block";
+      event.stopPropagation();
+      } else {
+        list.style.display = "none";
+      }
+      
+    });
+    document.addEventListener("click", function() {
+      document.getElementById("star-dropdown").style.display = "none";
+    
+    });
   }  
   private addNewTab() {
     const tab = document.createElement('div');
