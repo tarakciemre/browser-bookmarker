@@ -26,6 +26,7 @@ class TabManager {
 
     document.querySelector('#star-button').addEventListener('click', () => this.addToBookMark());
     document.querySelector('#bookmark-button').addEventListener('click', () => this.openBookMarkTab());
+    document.querySelector('#login-button').addEventListener('click', () => this.openLoginTab());
 
 
     this.addTabButton.addEventListener('click', () => this.addNewTab());
@@ -90,6 +91,30 @@ class TabManager {
     this.setStarFill("")
     this.currentTab++;
 
+  }
+
+  openLoginTab() {
+    const tab = document.createElement('div');
+    tab.className = 'tab fade-in tab-active';
+    tab.id = `${this.currentTab}`;
+    
+    const title = document.createElement('p');
+    title.textContent = 'Login';
+
+    const closeButton = document.createElement('button');
+    closeButton.className = 'remove-tab-button';
+    closeButton.textContent = 'x';
+    closeButton.addEventListener('click', () => this.closeTab(tab));
+    tab.addEventListener('click', () => this.changeUrl(Number(tab.getAttribute("id"))));
+    tab.appendChild(title);
+    tab.appendChild(closeButton);
+    this.tabsContainer.insertBefore(tab, this.addTabButton);
+
+    this.appManager.addLoginTab(this.currentTab, tab);
+    this.dispatcher.addTabAction(tab)
+
+    this.setStarFill("")
+    this.currentTab++;
   }
 
   private closeTab(tab: HTMLElement) {

@@ -4,6 +4,7 @@ export function createBookmarkView(bookmarksData:BookMark[]) {
     
     const mainWindow = document.createElement('div');
     mainWindow.classList.add('main-window');
+    mainWindow.classList.add('container');
     
     const windowTitle = document.createElement('h1');
     windowTitle.textContent = 'Bookmarks';
