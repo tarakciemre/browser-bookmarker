@@ -1,17 +1,21 @@
+import { History } from "../history_manager/history"; 
+
 
 export class SearchHistory {
-
-    defaultPage = "https://www.google.com";
-    historyArray: Array<string>;
+    defaultLink = "https://www.google.com";
+    defaultTitle = "Google";
+    defaultPage: History;
+    historyArray: History[] = [];
     index: number;
 
     constructor() {
+        this.defaultPage = new History(this.defaultLink, this.defaultTitle)
         this.historyArray = [];
         this.index = -1;
     }
 
     getCurrent() {
-        var current;
+        var current: History;
         switch (this.index) {
             case -1:
                 current = this.defaultPage;
@@ -20,7 +24,7 @@ export class SearchHistory {
                 current = this.historyArray[this.index];
                 break;
         }
-        return current;
+        return current.getLink();
     }
 
     getBackward() {
@@ -59,9 +63,10 @@ export class SearchHistory {
         return this.getCurrent();
     }
 
-    add(link: string) {
+    add(link: string, title: string): void {
+        const newHistory = new History(link, title)
         this.index = this.index + 1;
         this.historyArray = this.historyArray.slice(0, this.index);
-        this.historyArray.push(link);
+        this.historyArray.push(newHistory);
     }
 }

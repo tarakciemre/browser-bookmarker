@@ -1,4 +1,4 @@
-import { SearchHistory } from "../Navigator/history";
+import { SearchHistory } from "../Navigator/searchHistory";
 import { createWebView } from "../Controllers/webRenderer";
 import { renderListener } from "../Events/eventInterfaces";
 import { RenderDispatcher } from "../Events/renderEventDispatcher";
@@ -34,7 +34,7 @@ export class Tab implements renderListener{
     }
 
     searchWebURL(url:string): string {
-        this.history.add(url)
+        this.history.add(url, this.getTitle())
         this.destroy()
         this.webView = createWebView(url)
         this.setTitle()
@@ -53,7 +53,7 @@ export class Tab implements renderListener{
         this.destroy()
         this.history.goForward()
         const url = this.history.getCurrent()
-        this.webView = createWebView(url)
+        this.webView = createWebView(this.history.getCurrent())
         this.setTitle()
         return url
     }

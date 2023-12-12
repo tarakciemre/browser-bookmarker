@@ -65,6 +65,9 @@ class TabManager {
     this.dispatcher.addTabAction(tab)
     this.setStarFill("https://www.google.com")
 
+    const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
+    searchBarInput.value = "";
+
     this.currentTab++;
   }
 
@@ -87,6 +90,9 @@ class TabManager {
 
     this.appManager.addBookmarkTab(this.currentTab, tab, this.bookmarkManager.getAllBookmarks());
     this.dispatcher.addTabAction(tab)
+
+    const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
+    searchBarInput.value = "";
 
     this.setStarFill("")
     this.currentTab++;
@@ -112,6 +118,9 @@ class TabManager {
 
     this.appManager.addLoginTab(this.currentTab, tab);
     this.dispatcher.addTabAction(tab)
+
+    const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
+    searchBarInput.value = "";
 
     this.setStarFill("")
     this.currentTab++;

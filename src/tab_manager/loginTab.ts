@@ -1,4 +1,4 @@
-import { SearchHistory } from "../Navigator/history";
+import { SearchHistory } from "../Navigator/searchHistory";
 import { createWebView } from "../Controllers/webRenderer";
 import { renderListener } from "../Events/eventInterfaces";
 import { RenderDispatcher } from "../Events/renderEventDispatcher";
