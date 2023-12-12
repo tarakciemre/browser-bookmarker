@@ -39,22 +39,8 @@ class TabManager {
     this.appManager = new AppManager();
     this.bookmarkManager = new BookMarkManager();
 
-    this.addNewTab()
-    document.getElementById("star-button").addEventListener("click", function() {
-      const list = document.getElementById("star-dropdown");
-      if ( list.style.display === "none" ) {
-        document.getElementById("star-dropdown").style.display = "block";
-      event.stopPropagation();
-      } else {
-        list.style.display = "none";
-      }
-      
-    });
-    document.addEventListener("click", function() {
-      document.getElementById("star-dropdown").style.display = "none";
-    
-    });
-  }  
+    this.addNewTab();
+  }
   private addNewTab() {
     const tab = document.createElement('div');
     tab.className = 'tab fade-in tab-active';
