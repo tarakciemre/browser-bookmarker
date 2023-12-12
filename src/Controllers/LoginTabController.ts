@@ -4,30 +4,50 @@ export function createLoginTab() {
     const loginContainer = document.createElement('div');
     loginContainer.classList.add('main-window');
     loginContainer.classList.add('container');
+    loginContainer.id = "login-container"
 
     const loginHeader = document.createElement('div');
     loginHeader.classList.add('login-header');
+    loginHeader.id = "login-header"
+
     const heading = document.createElement('h2');
     heading.textContent = 'Login';
+    heading.id = "heading"
+
     loginHeader.appendChild(heading);
 
     const loginForm = document.createElement('div');
     loginForm.classList.add('login-form');
 
     const formGroup1 = createFormGroup('username', 'text', 'Enter your username');
+    formGroup1.id = "form-group1"
+
     const formGroup2 = createFormGroup('password', 'password', 'Enter your password');
+    formGroup2.id = "form-group2"
 
     const submitButton = document.createElement('button');
+    submitButton.id = "submit-button"
+
     submitButton.type = 'submit';
     submitButton.textContent = 'Login';
     submitButton.addEventListener('click', handleLogin);
+
+    const signUpButton = document.createElement('button');
+    signUpButton.textContent = 'Sign Up';
+    signUpButton.addEventListener('click', openSignUpTab);
 
     loginForm.appendChild(formGroup1);
     loginForm.appendChild(formGroup2);
     loginForm.appendChild(submitButton);
 
+    const signUpLink = document.createElement('p');
+    signUpLink.textContent = 'Not a member yet? ';
+    signUpLink.appendChild(signUpButton);
+    signUpLink.id = "sign-up-link"
+
     loginContainer.appendChild(loginHeader);
     loginContainer.appendChild(loginForm);
+    loginContainer.appendChild(signUpLink);
 
     const parentElement = document.getElementById('webview-container');
     parentElement.appendChild(loginContainer);
@@ -52,6 +72,19 @@ function createSuccessPage(username:string) {
     if (welcomeHeader) {
         welcomeHeader.textContent = `Welcome, ${username}!`;
     }
+}
+
+function openSignUpTab(){
+    const heading = document.querySelector("#login-header")
+    heading.textContent = 'Sign Up';
+
+    const submitButton = document.querySelector("#submit-button")
+    submitButton.textContent = 'Sign Up';
+
+    submitButton.addEventListener('click', handleSignUp);
+
+    const signUpLink = document.querySelector("#sign-up-link")
+    signUpLink.remove()
 }
 
 function createFormGroup(id: string, type: string, placeholder: string): HTMLDivElement {
@@ -91,4 +124,8 @@ async function handleLogin(event: Event) {
             createSuccessPage(username)
         }
     })
+}
+
+async function handleSignUp(event: Event){
+
 }
