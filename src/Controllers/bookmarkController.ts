@@ -17,7 +17,7 @@ export function createBookmarkView(bookmarksData:BookMark[]) {
         const listItem = document.createElement('li');
 
         const bookmarkInfo = document.createElement('p');
-        bookmarkInfo.textContent = `${bookmark.siteName} (${bookmark.link})`;
+        bookmarkInfo.textContent = `${bookmark.siteName} - ${bookmark.link}`;
 
         const goToWebSiteButton = document.createElement('button');
         goToWebSiteButton.textContent = 'Go to Website';

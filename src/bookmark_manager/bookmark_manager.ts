@@ -18,14 +18,14 @@ export class BookMarkManager{
         let data = await fetchBookMarks(user.token, user.username)
         this.bookmarks = data.map((b:any) => {
             console.log(b.url)
-            // const urlObject = new URL(b.url);
-            // const hostname = urlObject.hostname;
-            // let siteName;
-            // b.url.includes("www")?
-            //     siteName = hostname.split('.')[1]:
-            //     siteName = hostname.split('.')[0]
-            // siteName = siteName.charAt(0).toUpperCase() + siteName.slice(1)
-            return new BookMark(b.id, "siteName", b.url)
+            const urlObject = new URL(b.url);
+            const hostname = urlObject.hostname;
+            let siteName;
+            b.url.includes("www")?
+                siteName = hostname.split('.')[1]:
+                siteName = hostname.split('.')[0]
+            siteName = siteName.charAt(0).toUpperCase() + siteName.slice(1)
+            return new BookMark(b.id, siteName, b.url)
         })
         return this.bookmarks;
     }
