@@ -317,26 +317,29 @@ background-color: #0056b3;
     padding: 15px; /* Padding for each bookmark item */
     margin-left: 15px; /* Margin to the left of each bookmark item */
     margin-right: 15px; /* Margin to the right of each bookmark item */
-}
+    display: flex; /* Use flexbox for positioning */
+    align-items: center; /* Align items vertically */
+    justify-content: space-between; /* Distribute space between items */
+  }
 
 /* Styles for bookmark info */
 .bookmark-list li p {
     margin: 0;
     font-size: 28px;
     color: #555;
-  }
+}
   
   /* Separate title from link */
-  .bookmark-list li p a {
+.bookmark-list li p a {
     display: block;
     margin-top: 80px; /* Add margin between the title and link */
     color: #007bff; /* Link color */
     text-decoration: none;
-  }
+}
 
 .bookmark-list li:first-child {
     margin-top: 10px; /* Margin only for the right side of the first bookmark item */
-  }
+}
 
 /* Styles for generate button */
 .bookmark-list li button {
