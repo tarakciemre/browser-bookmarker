@@ -3,11 +3,13 @@ export class BookMark{
     siteName: string;
     link: string;
     addDate: Date;
+    id: number;
 
-    constructor(siteName: string, link: string){
+    constructor(id:number, siteName: string, link: string){
         this.siteName = siteName;
         this.link = link;
         this.addDate = new Date();
+        this.id = id
     }
 
     getBookMark(): BookMark{
