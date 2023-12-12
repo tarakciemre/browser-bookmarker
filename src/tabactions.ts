@@ -1,12 +1,11 @@
 import { RenderDispatcher } from "./Events/renderEventDispatcher";
-import { AppManager } from "./tab_manager/app_manager";
+import * as user from "./user_manager/user";
 import{ processString } from "./StringManipulation/link_processor";
 import { getUrlTitle } from "./Controllers/requestSender";
 import { BookMarkManager } from "./bookmark_manager/bookmark_manager";
 class TabManager {
   private tabsContainer: HTMLElement;
   private addTabButton: HTMLElement;
-  private appManager: AppManager;
   private bookmarkManager:BookMarkManager
   private searchBar: HTMLElement;
   private forwardBackButtons: HTMLElement;
@@ -37,7 +36,6 @@ class TabManager {
       this.dispatcher.addTabAction(tab)
     });
 
-    this.appManager = new AppManager();
     this.bookmarkManager = new BookMarkManager();
 
     this.addNewTab();
@@ -61,7 +59,7 @@ class TabManager {
     
     this.tabsContainer.insertBefore(tab, this.addTabButton);
 
-    this.appManager.addTab(this.currentTab, tab);
+    user.appManager.addTab(this.currentTab, tab);
     this.dispatcher.addTabAction(tab)
     this.setStarFill("https://www.google.com")
 
@@ -71,7 +69,7 @@ class TabManager {
     this.currentTab++;
   }
 
-  private openBookMarkTab() {
+  private async openBookMarkTab() {
     const tab = document.createElement('div');
     tab.className = 'tab fade-in tab-active';
     tab.id = `${this.currentTab}`;
@@ -87,8 +85,8 @@ class TabManager {
     tab.appendChild(title);
     tab.appendChild(closeButton);
     this.tabsContainer.insertBefore(tab, this.addTabButton);
-
-    this.appManager.addBookmarkTab(this.currentTab, tab, this.bookmarkManager.getAllBookmarks());
+    let bookmarks = await this.bookmarkManager.getAllBookmarks()
+    user.appManager.addBookmarkTab(this.currentTab, tab, bookmarks);
     this.dispatcher.addTabAction(tab)
 
     const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
@@ -116,7 +114,7 @@ class TabManager {
     tab.appendChild(closeButton);
     this.tabsContainer.insertBefore(tab, this.addTabButton);
 
-    this.appManager.addLoginTab(this.currentTab, tab);
+    user.appManager.addLoginTab(this.currentTab, tab);
     this.dispatcher.addTabAction(tab)
 
     const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
@@ -128,20 +126,20 @@ class TabManager {
 
   private closeTab(tab: HTMLElement) {
     this.tabsContainer.removeChild(tab);
-    const tabObject = this.appManager.getTab(Number(tab.id))
+    const tabObject = user.appManager.getTab(Number(tab.id))
     tabObject.destroy()
   }
   private renderUrl() {
     const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
     const url = searchBarInput.value;
-    const tabObject = this.appManager.activeTab
+    const tabObject = user.appManager.activeTab
     const alteredUrl = processString(url);
     tabObject.searchWebURL(alteredUrl)
 
     this.setStarFill(url)
   }
   private goBack() {
-    const activeTab = this.appManager.activeTab;
+    const activeTab = user.appManager.activeTab;
     const url = activeTab.goToPrevious();
     const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
     searchBarInput.value = url;
@@ -149,7 +147,7 @@ class TabManager {
     this.setStarFill(url)
   }
   private goNext() {
-    const activeTab = this.appManager.activeTab;
+    const activeTab = user.appManager.activeTab;
     const url = activeTab.goToNext();
     const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
     searchBarInput.value = url;
@@ -157,11 +155,11 @@ class TabManager {
     this.setStarFill(url)
   }
   private reload() {
-    const activeTab = this.appManager.activeTab;
+    const activeTab = user.appManager.activeTab;
     activeTab.reload();
   }
   private changeUrl(id: number) {
-    const activeTab = this.appManager.getTab(id);
+    const activeTab = user.appManager.getTab(id);
     const url = activeTab.getURL();
     const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
     searchBarInput.value = url;  
@@ -169,7 +167,7 @@ class TabManager {
   }
 
   private addToBookMark() {
-    const activeTab = this.appManager.activeTab
+    const activeTab = user.appManager.activeTab
     if (this.bookmarkManager.isBookmarked(activeTab.getURL())) {
       this.bookmarkManager.deleteBookMark(activeTab.getURL())
       const starImage:HTMLImageElement = document.querySelector("#star-image")

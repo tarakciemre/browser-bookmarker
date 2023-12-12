@@ -1,10 +1,12 @@
 import { BookMark } from "./bookmark";
+import axios from "axios";
+import * as user from "../user_manager/user"
 
 export class BookMarkManager{
     bookmarks: BookMark[] = [];
 
     constructor(){
-        this.bookmarks = []
+        this.getAllBookmarks()
     }
 
     getBookMark(link: string): BookMark{
@@ -12,7 +14,11 @@ export class BookMarkManager{
         return foundBookmark
     }
 
-    getAllBookmarks() {
+    async getAllBookmarks() {
+        let data = await fetchBookMarks(user.token, user.username)
+        this.bookmarks = data.map((b:any) => {
+            return new BookMark("", b.url)
+        })
         return this.bookmarks;
     }
 
@@ -42,4 +48,31 @@ export class BookMarkManager{
 
         return false;
     }
+
+}
+
+export async function fetchBookMarks(token:string, username: string){
+    try  {
+        const response = await axios.get("https://browser-bookmarker-backend.vercel.app/bookmarks/" + username, {
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        })
+        return response.data;
+    } catch (e) {
+        return false
+    }
+}
+
+export async function addBookMark(username: string, password: string){
+    // try  {
+    //     const response = await axios.post('https://browser-bookmarker-backend.vercel.app/login', {
+    //         username: username,
+    //         password: password
+    //     })
+        
+    //     return token;
+    // } catch (e) {
+    //     return false
+    // }
 }

@@ -1,3 +1,5 @@
+import { login } from "../user_manager/user";
+
 export function createLoginTab() {
     const loginContainer = document.createElement('div');
     loginContainer.classList.add('main-window');
@@ -33,6 +35,25 @@ export function createLoginTab() {
     return loginContainer;
 }
 
+function createSuccessPage(username:string) {
+    const welcomeHeader = document.querySelector('.login-header h2');
+    const usernameInput = document.getElementById('username') as HTMLInputElement;
+    const passwordInput = document.getElementById('password') as HTMLInputElement;
+
+    // Clear text inputs
+    if (usernameInput) {
+        usernameInput.value = '';
+    }
+    if (passwordInput) {
+        passwordInput.value = '';
+    }
+
+    // Change heading to "Welcome {username}"
+    if (welcomeHeader) {
+        welcomeHeader.textContent = `Welcome, ${username}!`;
+    }
+}
+
 function createFormGroup(id: string, type: string, placeholder: string): HTMLDivElement {
     const formGroup = document.createElement('div');
     formGroup.classList.add('form-group');
@@ -57,7 +78,17 @@ function capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function handleLogin(event: Event): void {
-    event.preventDefault();
-    // Add your login logic here
+async function handleLogin(event: Event) {
+    const usernameInput = document.getElementById('username') as HTMLInputElement;
+    const passwordInput = document.getElementById('password') as HTMLInputElement;
+
+    const username = usernameInput.value;
+    const password = passwordInput.value;
+
+    // Call the login function with the username and password as arguments
+    login(username, password).then((r) => {
+        if (r) {
+            createSuccessPage(username)
+        }
+    })
 }

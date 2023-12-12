@@ -5,7 +5,7 @@ import { BookmarkTab } from './bookmarkTab';
 import { BookMark } from '../bookmark_manager/bookmark';
 import { LoginTab } from './loginTab';
 
-export class AppManager implements renderListener {
+export default class AppManager implements renderListener {
     tabs: Tab[] = [];
     activeTab: Tab;
 
