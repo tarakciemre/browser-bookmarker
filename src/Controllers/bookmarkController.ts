@@ -1,3 +1,4 @@
+import { NewTabDispatcher } from "../Events/NewTabDispatcher";
 import { BookMark } from "../bookmark_manager/bookmark";
 
 export function createBookmarkView(bookmarksData:BookMark[]) {
@@ -18,12 +19,18 @@ export function createBookmarkView(bookmarksData:BookMark[]) {
         const bookmarkInfo = document.createElement('p');
         bookmarkInfo.textContent = `${bookmark.siteName} (${bookmark.link})`;
 
+        const goToWebSiteButton = document.createElement('button');
+        goToWebSiteButton.textContent = 'Go to Website';
+        goToWebSiteButton.id = bookmark.link
+        NewTabDispatcher.getInstance().addDispatchAction(goToWebSiteButton)
+
+
         const generateButton = document.createElement('button');
         generateButton.textContent = 'Generate Similar Bookmarks';
-
         generateButton.addEventListener('click', () => handleButtonClick(bookmark.link));
 
         listItem.appendChild(bookmarkInfo);
+        listItem.appendChild(goToWebSiteButton)
         listItem.appendChild(generateButton);
 
         bookmarkList.appendChild(listItem);

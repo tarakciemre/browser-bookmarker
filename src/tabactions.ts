@@ -3,7 +3,9 @@ import * as user from "./user_manager/user";
 import{ processString } from "./StringManipulation/link_processor";
 import { getUrlTitle } from "./Controllers/requestSender";
 import { BookMarkManager } from "./bookmark_manager/bookmark_manager";
-class TabManager {
+import { NewTabListener } from "./Events/eventInterfaces";
+import { NewTabDispatcher } from "./Events/NewTabDispatcher";
+class TabManager implements NewTabListener {
   private tabsContainer: HTMLElement;
   private addTabButton: HTMLElement;
   private bookmarkManager:BookMarkManager
@@ -13,6 +15,7 @@ class TabManager {
   private dispatcher: RenderDispatcher;
 
   constructor() {
+    NewTabDispatcher.getInstance().addObserver(this)
     this.dispatcher = RenderDispatcher.getInstance();
     this.tabsContainer = document.querySelector('.tab-bar')!;
     this.addTabButton = document.querySelector('.add-tab-button')!; 
@@ -40,6 +43,11 @@ class TabManager {
 
     this.addNewTab();
   }
+
+  onNewTab(url: string): void {
+    this.addNewTabWithUrl(url)
+  }
+
   private addNewTab() {
     const tab = document.createElement('div');
     tab.className = 'tab fade-in tab-active';
@@ -65,6 +73,36 @@ class TabManager {
 
     const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
     searchBarInput.value = "";
+
+    this.currentTab++;
+  }
+
+  private addNewTabWithUrl(url:string) {
+    const tab = document.createElement('div');
+    tab.className = 'tab fade-in tab-active';
+    tab.id = `${this.currentTab}`;
+    
+    const title = document.createElement('p');
+    title.className = "tab-title"
+    title.textContent = 'Google';
+
+    const closeButton = document.createElement('button');
+    closeButton.className = 'remove-tab-button';
+    closeButton.textContent = 'x';
+    closeButton.addEventListener('click', () => this.closeTab(tab));
+    tab.appendChild(title);
+    tab.appendChild(closeButton);
+    tab.addEventListener('click', () => this.changeUrl(Number(tab.getAttribute("id"))));
+    
+    this.tabsContainer.insertBefore(tab, this.addTabButton);
+
+    user.appManager.addTab(this.currentTab, tab);
+    user.appManager.getTab(Number(tab.getAttribute("id"))).searchWebURL(url);
+    this.dispatcher.addTabAction(tab)
+    this.setStarFill(url)
+
+    const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
+    searchBarInput.value = url;
 
     this.currentTab++;
   }
