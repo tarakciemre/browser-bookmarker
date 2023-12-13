@@ -1,3 +1,4 @@
+import { requestFromOpenAi } from "../gpt_service/gptService";
 import { NewTabDispatcher } from "../Events/NewTabDispatcher";
 import { BookMark } from "../bookmark_manager/bookmark";
 
@@ -27,9 +28,12 @@ export function createBookmarkView(bookmarksData:BookMark[]) {
 
         const generateButton = document.createElement('button');
         generateButton.textContent = 'Generate Similar Bookmarks';
-        generateButton.addEventListener('click', () => handleButtonClick(bookmark.link));
-
+        generateButton.addEventListener('click', () => handleButtonClick(bookmark.link, listItem));  
+        const generateText = document.createElement('p');
+        generateText.style.display = 'none'; 
         listItem.appendChild(bookmarkInfo);
+        listItem.appendChild(generateText);
+
         listItem.appendChild(goToWebSiteButton)
         listItem.appendChild(generateButton);
 
@@ -46,6 +50,14 @@ export function createBookmarkView(bookmarksData:BookMark[]) {
     return mainWindow
 }
 
-function handleButtonClick(url:string) {
-
+function handleButtonClick(url:string, listItem:HTMLLIElement) {
+    requestFromOpenAi(url).then((res) => {
+        // the string format is category: category_name, similar websites: url1, url2, url3
+        // get the url's after similar websites:
+        // websites have https:// in front of them
+        const similarWebsites = res.split('similar websites: ')[1].split(', ');
+        const similarWebsitesList = document.createElement('li');
+        similarWebsitesList.textContent = similarWebsites.join(', ');
+        listItem.appendChild(similarWebsitesList);
+    });
 }

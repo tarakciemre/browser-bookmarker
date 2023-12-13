@@ -1,6 +1,5 @@
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
-import { requestSongFromOpenAi } from "./gpt_service/gptService";
 import { getBookmarks } from "./bookmark_manager/bookmark";
 
 function createWindow() {
