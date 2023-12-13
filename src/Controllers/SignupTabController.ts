@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export function createSignUpTab() {
     const signUpContainer = document.createElement('div');
     signUpContainer.classList.add('main-window');
@@ -20,7 +22,6 @@ export function createSignUpTab() {
     const submitButton = document.createElement('button');
     submitButton.type = 'submit';
     submitButton.textContent = 'Sign Up';
-    submitButton.addEventListener('click', handleSignUp);
 
     signUpForm.appendChild(formGroup1);
     signUpForm.appendChild(formGroup2);
@@ -50,10 +51,7 @@ function createFormGroup(inputId: string, inputType: string, placeholderText: st
     return formGroup;
 }
 
-function handleSignUp(event: Event): void{
-    event.preventDefault();
-    // Add your signup logic here
-}
+
 
 function openSignUpTab(){
     const tab = document.createElement('div');

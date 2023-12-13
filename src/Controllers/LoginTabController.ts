@@ -1,4 +1,5 @@
 import { login } from "../user_manager/user";
+import axios from "axios";
 
 export function createLoginTab() {
     const loginContainer = document.createElement('div');
@@ -126,6 +127,41 @@ async function handleLogin(event: Event) {
     })
 }
 
-async function handleSignUp(event: Event){
+function handleSignUp(event: Event): void{
+    event.preventDefault();
+    // Retrieve user input values
+    const usernameInput = document.getElementById('username') as HTMLInputElement;
+    const passwordInput = document.getElementById('password') as HTMLInputElement;
+    const confirmPasswordInput = document.getElementById('confirmPassword') as HTMLInputElement;
 
+    // Create an object with the data to be sent in the POST request
+    const signUpData = {
+        name: 'Ali',
+        username: usernameInput.value,
+        password: passwordInput.value,
+    };
+
+    axios.post('https://browser-bookmarker-backend.vercel.app/user', {
+        name: signUpData.name,
+        username: signUpData.username,
+        password: signUpData.password
+    })
+        .then(response => {
+            console.log('Response:', response.data);
+
+            if (response.status === 200) {
+                const signUpHeader = document.querySelector('.login-header h2');
+                if (signUpHeader) {
+                    signUpHeader.textContent = 'Success';
+                }
+            }
+        })
+        .catch(error => {
+            // Handle errors
+            console.error('Error:', error);
+
+            // Display an error message to the user if needed
+            alert('An error occurred during signup. Please try again.');
+        });
+    
 }

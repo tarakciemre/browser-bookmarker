@@ -24,6 +24,7 @@ class TabManager implements NewTabListener {
     this.forwardBackButtons.querySelector('#left')!.addEventListener('click', () => this.goBack());
     this.forwardBackButtons.querySelector('#right')!.addEventListener('click', () => this.goNext());
     this.forwardBackButtons.querySelector('#reload')!.addEventListener('click', () => this.reload());
+    this.forwardBackButtons.querySelector('#home')!.addEventListener('click', () => this.goHome());
     this.searchBar.querySelector("#search-button").addEventListener('click', () => this.renderUrl());
 
     document.querySelector('#star-button').addEventListener('click', () => this.addToBookMark());
@@ -105,6 +106,15 @@ class TabManager implements NewTabListener {
     searchBarInput.value = url;
 
     this.currentTab++;
+  }
+
+  goHome() {
+    let activeTab = user.appManager.activeTab
+    activeTab.searchWebURL("https://www.google.com")
+    const searchBarInput = this.searchBar.querySelector('#search-bar') as HTMLInputElement;
+    searchBarInput.value = "https://www.google.com";
+
+    this.setStarFill("https://www.google.com")
   }
 
   private async openBookMarkTab() {
