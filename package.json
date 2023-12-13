@@ -7,7 +7,8 @@
     "watch": "tsc -w",
     "lint": "eslint -c .eslintrc --ext .ts ./src",
     "start": "npm run build && electron ./dist/main.js",
-    "begin": "tsc && npx webpack --config webpack.config.js && npm run build && electron ./dist/main.js"
+    "begin": "tsc && npx webpack --config webpack.config.js && npm run build && electron ./dist/main.js",
+    "test": "node ./test/apiTest.js"
   },
   "repository": "https://github.com/electron/electron-quick-start-typescript",
   "keywords": [
@@ -24,6 +25,7 @@
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "electron": "^24.3.0",
+    "electron-builder": "^24.9.1",
     "eslint": "^7.32.0",
     "typescript": "^4.9.5",
     "webpack": "^5.89.0",

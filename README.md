@@ -1,4 +1,4 @@
-# Browsiuu
+# Browse You
 Simple web browser with AI supported bookmark generation.
 
 ### User Guide
@@ -16,6 +16,13 @@ The application start script is customized for our case due to some inconvinienc
 In order to start the application locally, run the following command in the terminal.
 ```bash
 npm run begin
+```
+
+#### Run tests
+In order to run the tests, you can use the test script.
+In a terminal run the following command.
+```bash
+npm run test
 ```
 
 
