@@ -149,10 +149,20 @@ function handleSignUp(event: Event): void{
         .then(response => {
             console.log('Response:', response.data);
 
-            if (response.status === 200) {
-                const signUpHeader = document.querySelector('.login-header h2');
+            if (response.status === 201) {
+                const signUpHeader = document.querySelector('#login-header');
                 if (signUpHeader) {
                     signUpHeader.textContent = 'Success';
+                }
+                const usernameInput = document.getElementById('username') as HTMLInputElement;
+                const passwordInput = document.getElementById('password') as HTMLInputElement;
+
+                // Clear text inputs
+                if (usernameInput) {
+                    usernameInput.value = '';
+                }
+                if (passwordInput) {
+                    passwordInput.value = '';
                 }
             }
         })

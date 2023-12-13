@@ -12,6 +12,7 @@ export function createBookmarkView(bookmarksData:BookMark[]) {
     windowTitle.textContent = 'Bookmarks';
 
     const bookmarkList = document.createElement('ul');
+    bookmarkList.id = "bookmark-list"
     bookmarkList.classList.add('bookmark-list');
 
     bookmarksData.forEach((bookmark:BookMark) => {
@@ -56,8 +57,26 @@ function handleButtonClick(url:string, listItem:HTMLLIElement) {
         // get the url's after similar websites:
         // websites have https:// in front of them
         const similarWebsites = res.split('similar websites: ')[1].split(', ');
-        const similarWebsitesList = document.createElement('li');
-        similarWebsitesList.textContent = similarWebsites.join(', ');
-        listItem.appendChild(similarWebsitesList);
+        
+        const parentList = document.querySelector('#bookmark-list');
+        
+        similarWebsites.map((w:any) => {
+            const rec = document.createElement('li');
+            const goToWebSiteButton = document.createElement('button');
+            goToWebSiteButton.textContent = 'Go to Website';
+            goToWebSiteButton.id = w
+            NewTabDispatcher.getInstance().addDispatchAction(goToWebSiteButton)
+            const text = document.createElement('p');
+            text.innerText = w
+            rec.appendChild(text)
+            rec.appendChild(goToWebSiteButton)
+            rec.classList.add("gpt-bookmark")
+            if (listItem.nextSibling != undefined && listItem.nextSibling != null && listItem.nextSibling) {
+                parentList.insertBefore(rec, listItem.nextSibling)
+            }
+            else {
+                parentList.appendChild(rec)
+            }
+        })
     });
 }
